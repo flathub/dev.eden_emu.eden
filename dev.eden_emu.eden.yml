@@ -7,6 +7,7 @@ sdk-extensions:
 command: eden-launcher
 
 finish-args:
+  - --device-if=all:!has-input-device
   - --device=dri
   - --device=input
   - --socket=wayland
