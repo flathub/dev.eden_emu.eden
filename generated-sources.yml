@@ -1,10 +1,3 @@
-- type: file
-  url: https://github.com/Eden-CI/PGO/releases/latest/download/eden.profdata
-  dest: .cache/cpm/
-  dest-filename: eden.profdata
-  sha256: 777dd9aefb9427ed08a642b02998f32c5ac120e5d32611d8f21cf1f4e68cee57
-  # MUST be manually updated when a new release occurs
-
 - type: archive
   dest: .cache/cpm/sdl2/2.32.10
   url: https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.32.10.tar.gz

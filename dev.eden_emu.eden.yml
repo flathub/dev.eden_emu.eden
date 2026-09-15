@@ -28,11 +28,11 @@ modules:
       no-debuginfo: true
       arch:
         x86_64:
-          cflags: -march=x86-64-v3 -mtune=generic -O3 -pipe -fprofile-instr-use=/eden.profdata
-          cxxflags: -march=x86-64-v3 -mtune=generic -O3 -pipe -fprofile-instr-use=/eden.profdata
+          cflags: -march=x86-64-v3 -mtune=generic -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata
+          cxxflags: -march=x86-64-v3 -mtune=generic -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata
         aarch64:
-          cflags: -march=armv8-a -mtune=generic -O3 -pipe -fprofile-instr-use=eden.profdata
-          cxxflags: -march=armv8-a -mtune=generic -O3 -pipe -fprofile-instr-use=eden.profdata
+          cflags: -march=armv8-a -mtune=generic -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata
+          cxxflags: -march=armv8-a -mtune=generic -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata
       env:
         AR: llvm-ar
         CC: clang
@@ -69,6 +69,11 @@ modules:
         tag: v0.2.1
         commit: 58c1e20ee58efa3900ba616207d460886214480b
       - generated-sources.yml
+      - type: file
+        url: https://github.com/Eden-CI/PGO/releases/latest/download/eden.profdata
+        dest-filename: eden.profdata
+        sha256: 777dd9aefb9427ed08a642b02998f32c5ac120e5d32611d8f21cf1f4e68cee57
+        # MUST be manually updated when a new release occurs
       
 
   - name: eden-flatpak
