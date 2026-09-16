@@ -35,14 +35,14 @@ modules:
         #O3: allows more optimizations, at cost of slightly less stability, which for this level of cpu usage is a must
         #pipe speeds up compiling, at cost of more memory usage.
         x86_64:
-          cflags: -march=x86-64-v3 -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata -fstrict-vtable-pointers -fno-asynchronous-unwind-tables -fmerge-all-constants -ffunction-sections -fdata-sections -fno-trapping-math -fno-math-errno -fomit-frame-pointer -fno-plt -fno-rtti -fno-exceptions -fstrict-aliasing
-          cxxflags: -march=x86-64-v3 -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata -fno-trapping-math -fno-math-errno -fomit-frame-pointer -fno-plt -fno-rtti -fno-exceptions -fstrict-aliasing
+          cflags: -march=x86-64-v3 -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata -fstrict-vtable-pointers -fno-asynchronous-unwind-tables -fmerge-all-constants -ffunction-sections -fdata-sections -fno-trapping-math -fno-math-errno -fomit-frame-pointer -fno-plt -fno-rtti -fstrict-aliasing
+          cxxflags: -march=x86-64-v3 -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata -fno-trapping-math -fno-math-errno -fomit-frame-pointer -fno-plt -fno-rtti -fstrict-aliasing
           #Ldflags are a deviation from upstream that result in smaller filesize.
           #Gc-sections 
           ldflags: -Wl,--icf=safe, -Wl,-O3 -Wl,--gc-sections -fuse-ld=lld -flto -fno-plt
         aarch64:
-          cflags: -march=armv8-a -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata -fstrict-vtable-pointers -fno-asynchronous-unwind-tables -fmerge-all-constants -ffunction-sections -fdata-sections -fno-trapping-math -fno-math-errno -fomit-frame-pointer -fno-plt -fno-rtti -fno-exceptions -fstrict-aliasing
-          cxxflags: -march=armv8-a -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata -fno-trapping-math -fno-math-errno -fomit-frame-pointer -fno-plt -fno-rtti -fno-exceptions -fstrict-aliasing
+          cflags: -march=armv8-a -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata -fstrict-vtable-pointers -fno-asynchronous-unwind-tables -fmerge-all-constants -ffunction-sections -fdata-sections -fno-trapping-math -fno-math-errno -fomit-frame-pointer -fno-plt -fno-rtti -fstrict-aliasing
+          cxxflags: -march=armv8-a -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata -fno-trapping-math -fno-math-errno -fomit-frame-pointer -fno-plt -fno-rtti -fstrict-aliasing
           ldflags: -Wl,--icf=safe, -Wl,-O3 -Wl,--gc-sections -fuse-ld=lld -flto -fno-plt
       env:
         AR: llvm-ar
