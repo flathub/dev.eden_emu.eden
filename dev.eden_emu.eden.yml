@@ -35,14 +35,14 @@ modules:
         #O3: allows more optimizations, at cost of slightly less stability, which for this level of cpu usage is a must
         #pipe speeds up compiling, at cost of more memory usage.
         x86_64:
-          cflags: -march=x86-64-v3 -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata -fstrict-vtable-pointers -fno-asynchronous-unwind-tables -fmerge-all-constants -ffunction-sections -fdata-sections
-          cxxflags: -march=x86-64-v3 -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata
+          cflags: -march=x86-64-v3 -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata -fstrict-vtable-pointers -fno-asynchronous-unwind-tables -fmerge-all-constants -ffunction-sections -fdata-sections -fno-trapping-math -fno-math-errno -fomit-frame-pointer -fno-plt -fno-rtti -fno-exceptions -fstrict-aliasing
+          cxxflags: -march=x86-64-v3 -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata -fno-trapping-math -fno-math-errno -fomit-frame-pointer -fno-plt -fno-rtti -fno-exceptions -fstrict-aliasing
           #Ldflags are a deviation from upstream that result in smaller filesize.
           #Gc-sections 
           ldflags: -Wl,--icf=safe, -Wl,-O3 -Wl,--gc-sections -fuse-ld=lld -flto -fno-plt
         aarch64:
-          cflags: -march=armv8-a -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata -fstrict-vtable-pointers -fno-asynchronous-unwind-tables -fmerge-all-constants -ffunction-sections -fdata-sections
-          cxxflags: -march=armv8-a -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata
+          cflags: -march=armv8-a -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata -fstrict-vtable-pointers -fno-asynchronous-unwind-tables -fmerge-all-constants -ffunction-sections -fdata-sections -fno-trapping-math -fno-math-errno -fomit-frame-pointer -fno-plt -fno-rtti -fno-exceptions -fstrict-aliasing
+          cxxflags: -march=armv8-a -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata -fno-trapping-math -fno-math-errno -fomit-frame-pointer -fno-plt -fno-rtti -fno-exceptions -fstrict-aliasing
           ldflags: -Wl,--icf=safe, -Wl,-O3 -Wl,--gc-sections -fuse-ld=lld -flto -fno-plt
       env:
         AR: llvm-ar
@@ -82,22 +82,6 @@ modules:
       #should be covered by dbuild testing off, however there is enough evidence that some tests run anyways without these that these are added regardless
       - -DYUZU_TESTS=OFF
       - -DDYNARMIC_TESTS=OFF
-      #Safe math optimizations
-      - -fno-math-errno
-      - -fno-trapping-math
-      #Frame pointer (useful for specific debug builds), disabled here cause not needed
-      - -fomit-frame-pointer
-      - -fno-plt
-      #If using as reference, these next few flags may cause breakage, be careful and test these
-      #Start of risky flags
-        #Strict aliasing mode
-      - -fstrict-aliasing
-        #Disables runtime type info (only applies to c++ source files)
-      - -fno-rtti
-        # Disables c++ exceptions (only applies to c++ source files)
-      - -fno-exceptions
-      #End of risky flags
-      
 
     post-install:
       - desktop-file-edit --set-key Exec --set-value eden-launcher /app/share/applications/dev.eden_emu.eden.desktop
