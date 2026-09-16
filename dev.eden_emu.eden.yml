@@ -27,12 +27,19 @@ modules:
       strip: true
       no-debuginfo: true
       arch:
+      #These are duplicated because in testing, global flags are overridden by these unless explicitly set.
+      #Explanation of each:
+        #march tells compiler what cpu instructions allowed
+        #mtune helps it predict better for common devices within that set
+        #Flto: sets up link time optimization, increasing runtime at cost of slower compiling. Balanced out by lld
+        #O3: allows more optimizations, at cost of slightly less stability, which for this level of cpu usage is a must
+        #pipe speeds up compiling, at cost of more memory usage.
         x86_64:
-          cflags: -march=x86-64-v3 -mtune=generic -O3 -pipe
-          cxxflags: -march=x86-64-v3 -mtune=generic -O3 -pipe
+          cflags: -march=x86-64-v3 -mtune=generic -flto=thin -O3 -pipe
+          cxxflags: -march=x86-64-v3 -mtune=generic -flto=thin -O3 -pipe
         aarch64:
-          cflags: -march=armv8-a -mtune=generic -O3 -pipe
-          cxxflags: -march=armv8-a -mtune=generic -O3 -pipe
+          cflags: -march=armv8-a -mtune=generic -flto=thin -O3 -pipe
+          cxxflags: -march=armv8-a -mtune=generic -flto=thin -O3 -pipe
       env:
         AR: llvm-ar
         CC: clang
@@ -60,6 +67,8 @@ modules:
       - -DYUZU_USE_BUNDLED_SDL2=OFF
       - -DVulkanHeaders_FORCE_BUNDLED=ON
       - -DCMAKE_EXE_LINKER_FLAGS=-fuse-ld=lld
+      - -DYUZU_TESTS=OFF
+      - -DDYNARMIC_TESTS=OFF
 
     post-install:
       - desktop-file-edit --set-key StartupWMClass --set-value eden --set-key Exec --set-value eden-launcher /app/share/applications/dev.eden_emu.eden.desktop
