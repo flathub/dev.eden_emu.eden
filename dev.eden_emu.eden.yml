@@ -59,6 +59,7 @@ modules:
       - -DNIGHTLY_BUILD=OFF
       - -DYUZU_USE_BUNDLED_SDL2=OFF
       - -DVulkanHeaders_FORCE_BUNDLED=ON
+      - -DCMAKE_EXE_LINKER_FLAGS=-fuse-ld=lld
 
     post-install:
       - desktop-file-edit --set-key StartupWMClass --set-value eden --set-key Exec --set-value eden-launcher /app/share/applications/dev.eden_emu.eden.desktop
