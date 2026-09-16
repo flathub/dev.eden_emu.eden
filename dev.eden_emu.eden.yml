@@ -77,8 +77,6 @@ modules:
       - -DVulkanHeaders_FORCE_BUNDLED=ON
       #Forces linked to lld, which is ideal, again, for speeding up the linking on compile to speedup runtime.
       - -DCMAKE_EXE_LINKER_FLAGS=-fuse-ld=lld
-      #LDflags is here as well just to be extra sure they are used
-      - -LDFLAGS="-Wl,--icf=safe, -Wl,-O3 -Wl,--gc-sections -fuse-ld=lld -flto -fno-plt"
       #should be covered by dbuild testing off, however there is enough evidence that some tests run anyways without these that these are added regardless
       - -DYUZU_TESTS=OFF
       - -DDYNARMIC_TESTS=OFF
