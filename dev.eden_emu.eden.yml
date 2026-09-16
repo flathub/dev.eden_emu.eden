@@ -35,13 +35,13 @@ modules:
         #O3: allows more optimizations, at cost of slightly less stability, which for this level of cpu usage is a must
         #pipe speeds up compiling, at cost of more memory usage.
         x86_64:
-          cflags: -march=x86-64-v3 -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata
+          cflags: -march=x86-64-v3 -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata -fstrict-vtable-pointers -fno-asynchronous-unwind-tables -fmerge-all-constants -ffunction-sections -fdata-sections
           cxxflags: -march=x86-64-v3 -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata
           #Ldflags are a deviation from upstream that result in smaller filesize.
           #Gc-sections 
           ldflags: -Wl,--icf=safe, -Wl,-O3 -Wl,--gc-sections -fuse-ld=lld -flto -fno-plt
         aarch64:
-          cflags: -march=armv8-a -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata
+          cflags: -march=armv8-a -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata -fstrict-vtable-pointers -fno-asynchronous-unwind-tables -fmerge-all-constants -ffunction-sections -fdata-sections
           cxxflags: -march=armv8-a -mtune=generic -flto=thin -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata
           ldflags: -Wl,--icf=safe, -Wl,-O3 -Wl,--gc-sections -fuse-ld=lld -flto -fno-plt
       env:
@@ -77,6 +77,7 @@ modules:
       - -DVulkanHeaders_FORCE_BUNDLED=ON
       #Forces linked to lld, which is ideal, again, for speeding up the linking on compile to speedup runtime.
       - -DCMAKE_EXE_LINKER_FLAGS=-fuse-ld=lld
+      #LDflags is here as well just to be extra sure they are used
       - -LDFLAGS="-Wl,--icf=safe, -Wl,-O3 -Wl,--gc-sections -fuse-ld=lld -flto -fno-plt"
       #should be covered by dbuild testing off, however there is enough evidence that some tests run anyways without these that these are added regardless
       - -DYUZU_TESTS=OFF
@@ -96,12 +97,6 @@ modules:
         # Disables c++ exceptions (only applies to c++ source files)
       - -fno-exceptions
       #End of risky flags
-      #Clang only flags:
-      - -fstrict-vtable-pointers
-      - -fno-asynchronous-unwind-tables
-      - -fmerge-all-constants
-      - -ffunction-sections
-      - -fdata-sections
       
 
     post-install:
