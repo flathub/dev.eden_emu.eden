@@ -64,6 +64,7 @@
         "-DENABLE_UPDATE_CHECKER=OFF",
         "-DUSE_DISCORD_PRESENCE=ON",
         "-DENABLE_LTO=ON",
+        "-DENABLE_CUBEB=OFF",
         "-DYUZU_DISABLE_LLVM=ON"
       ],
       "post-install": [
