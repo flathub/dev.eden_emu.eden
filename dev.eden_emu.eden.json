@@ -3,9 +3,7 @@
   "runtime": "org.kde.Platform",
   "runtime-version": "6.11",
   "sdk": "org.kde.Sdk",
-  "sdk-extensions": [
-    "org.freedesktop.Sdk.Extension.llvm22"
-  ],
+  "sdk-extensions": ["org.freedesktop.Sdk.Extension.llvm22"],
   "command": "eden-launcher",
   "finish-args": [
     "--device-if=all:!has-input-device",
