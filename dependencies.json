@@ -13,12 +13,6 @@
   },
   {
     "type": "file",
-    "dest": ".cache/cpm/cubeb",
-    "url": "https://github.com/mozilla/cubeb/archive/fa02160712.tar.gz",
-    "sha512": "8a4bcb2f83ba590f52c66626e895304a73eb61928dbc57777e1822e55378e3568366f17f9da4b80036cc2ef4ea9723c32abf6e7d9bbe00fb03654f0991596ab0"
-  },
-  {
-    "type": "file",
     "dest": ".cache/cpm/discordrpc",
     "url": "https://github.com/eden-emulator/discord-rpc/archive/76616d8675.tar.gz",
     "sha512": "8d680b3a16d6f6bf292ad823cf8635595ff986f2a49f758e3009f505b540a9d75194a8cf44cddea75736a8c3e3b5160166e716a0939ce3f18cc463cf648753fe"
