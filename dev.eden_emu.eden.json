@@ -63,7 +63,7 @@
         "-DENABLE_QT_TRANSLATION=ON",
         "-DENABLE_UPDATE_CHECKER=OFF",
         "-DUSE_DISCORD_PRESENCE=ON",
-        "-DENABLE_LTO=ON",
+        "-DENABLE_LTO=OFF",
         "-DENABLE_CUBEB=OFF",
         "-DYUZU_DISABLE_LLVM=ON"
       ],
