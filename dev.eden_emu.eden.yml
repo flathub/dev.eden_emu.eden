@@ -11,7 +11,7 @@ finish-args:
   - --device=dri
   - --device=input
   - --socket=wayland
-  - --socket=x11
+  - --socket=fallback-x11
   - --socket=pulseaudio
   - --share=network
   - --share=ipc
@@ -48,7 +48,7 @@ modules:
       - -DENABLE_QT_TRANSLATION=ON
       - -DENABLE_UPDATE_CHECKER=OFF
       - -DUSE_DISCORD_PRESENCE=ON
-      - -DENABLE_LTO=ON
+      - -DENABLE_LTO=OFF
       - -DYUZU_USE_BUNDLED_SIRIT=OFF
       - -DYUZU_USE_BUNDLED_FFMPEG=OFF
       - -DYUZU_USE_BUNDLED_OPENSSL=OFF
@@ -74,7 +74,6 @@ modules:
         dest-filename: eden.profdata
         sha256: 777dd9aefb9427ed08a642b02998f32c5ac120e5d32611d8f21cf1f4e68cee57
         # MUST be manually updated when a new release occurs
-      
 
   - name: eden-flatpak
     buildsystem: simple
