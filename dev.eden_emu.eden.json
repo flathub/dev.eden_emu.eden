@@ -1,0 +1,106 @@
+{
+  "app-id": "dev.eden_emu.eden",
+  "runtime": "org.kde.Platform",
+  "runtime-version": "6.11",
+  "sdk": "org.kde.Sdk",
+  "sdk-extensions": ["org.freedesktop.Sdk.Extension.llvm22"],
+  "command": "eden-launcher",
+  "finish-args": [
+    "--device-if=all:!has-input-device",
+    "--device=input",
+    "--device=dri",
+    "--socket=wayland",
+    "--socket=x11",
+    "--socket=pulseaudio",
+    "--share=network",
+    "--share=ipc",
+    "--filesystem=xdg-run/app/com.discordapp.Discord:create"
+  ],
+  "modules": [
+    {
+      "name": "eden",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "build-options": {
+        "append-path": "/usr/lib/sdk/llvm22/bin",
+        "prepend-ld-library-path": "/usr/lib/sdk/llvm22/lib",
+        "strip": true,
+        "no-debuginfo": true,
+        "arch": {
+          "x86_64": {
+            "cflags": "-march=x86-64-v3 -mtune=generic -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata",
+            "cxxflags": "-march=x86-64-v3 -mtune=generic -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata"
+          },
+          "aarch64": {
+            "cflags": "-march=armv8-a -mtune=generic -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata",
+            "cxxflags": "-march=armv8-a -mtune=generic -O3 -pipe -fprofile-instr-use=/run/build/eden/eden.profdata"
+          }
+        },
+        "env": {
+          "AR": "llvm-ar",
+          "CC": "clang",
+          "CXX": "clang++",
+          "RANLIB": "llvm-ranlib"
+        }
+      },
+      "config-opts": [
+        "-DBUILD_TESTING=OFF",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DNIGHTLY_BUILD=OFF",
+        "-DYUZU_ROOM_STANDALONE=OFF",
+        "-DYUZU_STATIC_BUILD=OFF",
+        "-DYUZU_CMD=OFF",
+        "-DYUZU_USE_BUNDLED_QT=OFF",
+        "-DYUZU_USE_BUNDLED_SIRIT=OFF",
+        "-DYUZU_USE_BUNDLED_FFMPEG=OFF",
+        "-DYUZU_USE_BUNDLED_OPENSSL=OFF",
+        "-DYUZU_USE_BUNDLED_SDL3=OFF",
+        "-Dfmt_FORCE_BUNDLED=OFF",
+        "-Dzstd_FORCE_BUNDLED=OFF",
+        "-DVulkanHeaders_FORCE_BUNDLED=ON",
+        "-DYUZU_USE_QT_MULTIMEDIA=OFF",
+        "-DYUZU_USE_QT_WEB_ENGINE=OFF",
+        "-DENABLE_QT_TRANSLATION=ON",
+        "-DENABLE_UPDATE_CHECKER=OFF",
+        "-DUSE_DISCORD_PRESENCE=ON",
+        "-DENABLE_LTO=OFF",
+        "-DENABLE_CUBEB=OFF",
+        "-DYUZU_DISABLE_LLVM=ON"
+      ],
+      "post-install": [
+        "desktop-file-edit --set-key Exec --set-value eden-launcher /app/share/applications/dev.eden_emu.eden.desktop"
+      ],
+      "sources": [
+        "dependencies.json",
+        {
+          "type": "git",
+          "url": "https://git.eden-emu.dev/eden-emu/eden.git",
+          "tag": "989768aa46720e3fcab9e2111e3ddd70819c382b",
+          "commit": "989768aa46720e3fcab9e2111e3ddd70819c382b"
+        },
+        {
+          "type": "file",
+          "url": "https://github.com/Eden-CI/PGO/releases/download/v020525/eden.profdata",
+          "dest-filename": "eden.profdata",
+          "sha256": "777dd9aefb9427ed08a642b02998f32c5ac120e5d32611d8f21cf1f4e68cee57"
+        }
+      ]
+    },
+    {
+      "name": "eden-flatpak",
+      "buildsystem": "simple",
+      "build-commands": [
+        "install -Dm755 eden-launcher.sh /app/bin/eden-launcher",
+        "install -Dm644 dev.eden_emu.eden.metainfo.xml /app/share/metainfo/dev.eden_emu.eden.metainfo.xml"
+      ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://github.com/seraphicfae/dev.eden_emu.eden",
+          "tag": "c825",
+          "commit": "c8253d02e7162e4675cbcfedb0f78a7e7e005606"
+        }
+      ]
+    }
+  ]
+}
