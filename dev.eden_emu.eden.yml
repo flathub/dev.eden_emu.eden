@@ -11,11 +11,12 @@ finish-args:
   - --device=dri
   - --device=input
   - --socket=wayland
-  - --socket=x11
+  - --socket=fallback-x11
   - --socket=pulseaudio
   - --share=network
   - --share=ipc
   - --filesystem=xdg-run/app/com.discordapp.Discord:ro
+  - --env="QT_QPA_PLATFORM=xcb;wayland"
 
 modules:
   - name: eden
