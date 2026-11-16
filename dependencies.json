@@ -7,12 +7,6 @@
   },
   {
     "type": "file",
-    "url": "https://github.com/arun11299/cpp-jwt/archive/7f24eb4c32.tar.gz",
-    "sha512": "d11cbd5ddb3197b4c5ca15679bcd76a49963e7b530b7dd132db91e042925efa20dfb2c24ccfbe7ef82a7012af80deff0f72ee25851312ae80381a462df8534b8",
-    "dest": ".cache/cpm/cpp-jwt"
-  },
-  {
-    "type": "file",
     "url": "https://github.com/eden-emulator/discord-rpc/archive/76616d8675.tar.gz",
     "sha512": "8d680b3a16d6f6bf292ad823cf8635595ff986f2a49f758e3009f505b540a9d75194a8cf44cddea75736a8c3e3b5160166e716a0939ce3f18cc463cf648753fe",
     "dest": ".cache/cpm/discordrpc"
