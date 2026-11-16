@@ -74,7 +74,7 @@
         {
           "type": "git",
           "url": "https://git.eden-emu.dev/eden-emu/eden.git",
-          "commit": "c17bb9052c1f6af79f8d6889e666716a58ef4a5b"
+          "commit": "5274828c9c9cb1da5e0330555f10a3491c570aaf"
         },
         {
           "type": "file",
@@ -94,7 +94,7 @@
         {
           "type": "git",
           "url": "https://github.com/seraphicfae/dev.eden_emu.eden",
-          "commit": "f0f795919f2a2ca41f704ec0313c166526312058"
+          "commit": "81a5a0cfa75b570fc24d328e792c97cbc1c39e77"
         }
       ]
     }
